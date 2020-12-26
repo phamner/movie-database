@@ -3,6 +3,7 @@ import './App.css';
 import MovieList from './MovieList.js';
 import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -32,9 +33,43 @@ const arrayOfakeMovieData = [
 
 function App() {
 
+
+
+  let testHttpRequestMethod = function () {
+    axios.get('/test')
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+
+  }
+
   useEffect(() => {
     // Update the document title using the browser API
     document.title = `You clicked ${count} times`;
+
+    axios.get('/test')
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        // console.log('fake response');
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+
   });
 
 
@@ -58,6 +93,10 @@ function App() {
         setCount(count + 1);
       }}>
         Click me
+      </button>
+
+      <button onClick={() => { testHttpRequestMethod() }}>
+        Test HTTP request method
       </button>
 
       <div className="MovieList">
