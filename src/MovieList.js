@@ -3,6 +3,7 @@ import './styles.css';
 
 
 function MovieList(props) {
+    console.log('movieList Data: ', props)
     return (
         <div>
             <MovieListItem movieData={props.movieData} />

@@ -23,7 +23,7 @@ import React, { useState, useEffect } from 'react';
 function Example(props) {
     // Declare a new state variable, which we'll call "count"
     const [count, setCount] = useState('banana');
-    console.log('example: ', props.movieData)
+    // console.log('example: ', props.movieData)
 
     return (
         <div>
