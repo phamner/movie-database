@@ -31,51 +31,31 @@ const arrayOfakeMovieData = [
 ]
 
 function App() {
-  // const [movieData, setMovieData] = useState([
-  //   {
-  //     title: 'Gone with the Wind',
-  //     genre: 'Drama',
-  //     picture: 'people on windy day pic',
-  //     url: 'fakeGWTWurl'
-  //   }, {
-  //     title: 'Tiger King',
-  //     genre: 'Documentary',
-  //     picture: 'a redneck with tiger pic',
-  //     url: 'fakeTKurl'
-  //   }, {
-  //     title: 'March of the Pinguins',
-  //     genre: 'Documentary',
-  //     picture: 'Badass pinguins marching pic',
-  //     url: 'fakeMOTPurl'
-  //   }, {
-  //     title: 'Finding Nemo',
-  //     genre: 'Childrens Animated',
-  //     picture: 'A lost fish picture',
-  //     url: 'fakeFNurl'
-  //   }
-  // ]);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
+
+
+
 
   const [movieData, setMovieData] = useState([]);
   const [count, setCount] = useState(0);
 
-
-  let fakeMovieData = {
-    title: 'Gone with the Wind 2, revenge of scarlet',
-    genre: 'Drama lama',
-    picture: 'big fight',
-    url: 'fakeGWTW2url'
-  }
-
   return (
     <div className="App">
+      <p>You clicked the button {count} times</p>
+
 
 
 
 
       <button onClick={() => {
-        setMovieData(movieData => [...movieData, arrayOfakeMovieData[count]]);
+        if (count < arrayOfakeMovieData.length) {
+          setMovieData(movieData => [...movieData, arrayOfakeMovieData[count]]);
+        }
         setCount(count + 1);
-        console.log('click');
       }}>
         Click me
       </button>
