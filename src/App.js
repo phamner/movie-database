@@ -4,7 +4,7 @@ import MovieList from './MovieList.js';
 import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Form from './Form.js';
 
 
 const arrayOfakeMovieData = [
@@ -16,46 +16,32 @@ const arrayOfakeMovieData = [
     imdbID: "tt10399328"
 
   }
-  // {
-  //   title: 'Gone with the Wind',
-  //   genre: 'Drama',
-  //   picture: 'people on windy day pic',
-  //   url: 'fakeGWTWurl'
-  // }, {
-  //   title: 'Tiger King',
-  //   genre: 'Documentary',
-  //   picture: 'a redneck with tiger pic',
-  //   url: 'fakeTKurl'
-  // }, {
-  //   title: 'March of the Pinguins',
-  //   genre: 'Documentary',
-  //   picture: 'Badass pinguins marching pic',
-  //   url: 'fakeMOTPurl'
-  // }, {
-  //   title: 'Finding Nemo',
-  //   genre: 'Childrens Animated',
-  //   picture: 'A lost fish picture',
-  //   url: 'fakeFNurl'
-  // }
 ]
 
 function App() {
 
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `You clicked banana times`;
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   document.title = `You clicked banana times`;
 
-  });
+  // });
 
   const [movieData, setMovieData] = useState(arrayOfakeMovieData);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+  const [currentMovie, setCurrentMovie] = useState('');
 
-  let testHttpRequestMethod = function () {
-    axios.get('/movies')
+  let testHttpRequestMethod = function (testString) {
+    axios.get('/movies', {
+      params: {
+        ID: currentMovie,
+        count: count
+      }
+    })
       .then(function (response) {
         // handle success
         // console.log(response.data.Search);
-        setMovieData(movieData => [...movieData.concat(response.data.Search)]);
+        setMovieData(() => [...response.data.Search]);
+        setCount(count += 1);
 
 
       })
@@ -71,16 +57,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <p>You clicked the button {count} times</p>
-
-      <button onClick={() => {
-        if (count < arrayOfakeMovieData.length) {
-          setMovieData(movieData => [...movieData, arrayOfakeMovieData[count]]);
-        }
-        setCount(count + 1);
-      }}>
-        Click me
-      </button> */}
+      <Form onChange={(value) => { setCurrentMovie(value) }} />
+      <h1>The current movie is: {currentMovie}</h1>
 
       <button onClick={() => { testHttpRequestMethod() }}>
         Test HTTP request method

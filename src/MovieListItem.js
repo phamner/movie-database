@@ -1,7 +1,7 @@
 import './styles.css';
 
 function MovieListItem(props) {
-    console.log('movieListItem Data: ', props.movieData)
+    // console.log('movieListItem Data: ', props.movieData)
 
     let imageURL = props.movieData.Poster;
     let image = <img src={imageURL} alt="Italian Trulli"></img>
@@ -11,10 +11,8 @@ function MovieListItem(props) {
     return (
         <div className="MovieListItem">
             <h1>{props.movieData.Title}</h1>
-            <h4>{props.movieData.Poster}</h4>
-            <h4>{props.movieData.Type}</h4>
             <h4>{props.movieData.Year}</h4>
-            <h4>{imdbID}</h4>
+            <a href={imdbID}>IMBd Info</a>
             <div>{image}</div>
 
         </div>

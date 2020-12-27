@@ -25,11 +25,15 @@ app.get('/', (req, res) => {
 app.get('/movies', function (req, res) {
     // res.send('pong ping pong');
 
+    let movieSearchString = req.query.ID;
+    let count = req.query.count
+    // console.log(req.query.ID)
+
 
     const options = {
         method: 'GET',
         url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-        qs: { s: 'Avengers Endgame', page: '1', r: 'json' },
+        qs: { s: `${movieSearchString}`, page: `${count}`, r: 'json' },
         headers: {
             'x-rapidapi-key': keyHost.keyInfo.xRapidApiKey,
             'x-rapidapi-host': keyHost.keyInfo.xRapidApiHost,
@@ -39,16 +43,33 @@ app.get('/movies', function (req, res) {
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-
-        // console.log(body);
+        console.log(body);
         res.send(body);
-
     });
 
 });
 
-app.get('/test', function (req, res) {
-    res.send('test pong');
+//not working yet.
+app.get('/movieinfo', function (req, res) {
+    const options = {
+        method: 'GET',
+        url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+        qs: { i: 'tt4154796', r: 'json' },
+        headers: {
+            'x-rapidapi-key': '964b58f1dbmshbd6688ef7750c2ap1a6bddjsn27f00b87431b',
+            'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
+            useQueryString: true
+        }
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        res.send(body)
+        console.log(body);
+    });
+
+
 });
 
 app.post('/', function (req, res) {
