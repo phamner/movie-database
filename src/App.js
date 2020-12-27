@@ -5,7 +5,7 @@ import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
-import MoreDetailsMovie from './MoreDetailsMovie.js'
+import SingleMovieInfo from './SingleMovieInfo.js';
 
 const arrayOfakeMovieData = [
   {
@@ -28,24 +28,22 @@ function App() {
 
   const [movieData, setMovieData] = useState(arrayOfakeMovieData);
   const [count, setCount] = useState(1);
-  const [currentMovie, setCurrentMovie] = useState('');
+  const [currentSearchString, setCurrentSearchString] = useState('');
+  const [currentMovieData, setCurrentMovieData] = useState('');
+
   const [currentMovieID, setCurrentMovieID] = useState('');
-  const [singleMovieSelected, settSingleMovieSelected] = useState(false);
+  const [singleMovieSelected, setSingleMovieSelected] = useState(false);
 
   let searchMovies = function () {
     axios.get('/movies', {
       params: {
-        ID: currentMovie,
+        ID: currentSearchString,
         count: count
       }
     })
       .then(function (response) {
-        // handle success
-        // console.log(response.data.Search);
         setMovieData(() => [...response.data.Search]);
         setCount(count += 1);
-
-
       })
       .catch(function (error) {
         // handle error
@@ -56,21 +54,71 @@ function App() {
       });
   }
 
+  let getMoreInfoOnMovie = function () {
+    console.log('click want to get more info on movie');
+    setSingleMovieSelected(true);
+    let ID = 'tt1073510'
+
+    axios.get(`/movieinfo?ID=${currentMovieID}`,
+      // {
+      //   params: {
+
+      //     ID: 'tt1073510'
+      //     // ID: currentMovieID,
+      //     // number: 12345
+      //   }
+      // }
+    )
+
+      .then(function (response) {
+        // handle success
+        // console.log(response.data.Search);
+        // setMovieData(() => [...response.data.Search]);
+        // console.log(response.data)
+        setCurrentMovieData(response.data)
+
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+
+
+  }
+
+  let returnToMovieList = function () {
+    console.log('click want to go back to movie list');
+    setSingleMovieSelected(false);
+  }
+
   if (singleMovieSelected) {
-    return MoreDetailsMovie
+    return <SingleMovieInfo
+      currentMovieData={currentMovieData}
+      returnToMovieList={returnToMovieList}
+      setCurrentMovieData={setCurrentMovieData}
+    />
   } else {
     return (
       <div className="App">
-        {/* <MoreDetailsMovie /> */}
-        <h1>The current movie is: {currentMovie}</h1>
-        <Form onChange={(value) => { setCurrentMovie(value) }} />
+        <h1>The current movie is: {currentSearchString}</h1>
+        <Form onChange={(value) => { setCurrentSearchString(value) }} />
         <button onClick={() => { searchMovies() }}>
           Search Movies
         </button>
 
-
         <div className="MovieList">
-          {movieData.map(movieData => <MovieList movieData={movieData} key={movieData.imdbID} />)}
+          {movieData.map(movieData => <MovieList
+            movieData={movieData}
+            key={movieData.imdbID}
+            getMoreInfoOnMovie={getMoreInfoOnMovie}
+            setCurrentMovieID={setCurrentMovieID}
+            currentMovieID={currentMovieID}
+
+          />)}
         </div>
 
       </div >

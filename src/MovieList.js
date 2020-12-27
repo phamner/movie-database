@@ -3,10 +3,14 @@ import './styles.css';
 
 
 function MovieList(props) {
-    console.log('movieList Data: ', props)
     return (
         <div>
-            <MovieListItem movieData={props.movieData} />
+            <MovieListItem
+                movieData={props.movieData}
+                getMoreInfoOnMovie={props.getMoreInfoOnMovie}
+                setCurrentMovieID={props.setCurrentMovieID}
+                currentMovieID={props.currentMovieID}
+            />
         </div>
     )
 }

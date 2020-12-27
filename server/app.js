@@ -1,12 +1,21 @@
 const express = require('express');
 const app = express();
 const port = 8080;
-// const path = require('path');
-// const bodyParser = require('body-parser');
+const path = require('path');
 const request = require('request');
 const keyHost = require('./APIkeys.js');
 
+var morgan = require("morgan");
+const bodyParser = require('body-parser');
+
+
 // console.log('KEY INFO: ', keyHost.keyInfo.xRapidApiKey)
+app.use(morgan("common"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
+
+
 
 
 
@@ -14,20 +23,12 @@ app.get('/', (req, res) => {
     res.send('Hello Worlddd!')
 })
 
-// let data = {
-//     keyInfo:
-//     {
-//         xRapidApiKey: '964b58f1dbmshbd6688ef7750c2ap1a6bddjsn27f00b87431b',
-//         xRapidApiHost: 'movie-database-imdb-alternative.p.rapidapi.com'
-//     }
-// }
-
 app.get('/movies', function (req, res) {
     // res.send('pong ping pong');
 
     let movieSearchString = req.query.ID;
     let count = req.query.count
-    // console.log(req.query.ID)
+    // console.log(movieSearchString, count)
 
 
     const options = {
@@ -43,7 +44,7 @@ app.get('/movies', function (req, res) {
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        console.log(body);
+        // console.log(body);
         res.send(body);
     });
 
@@ -51,13 +52,24 @@ app.get('/movies', function (req, res) {
 
 //not working yet.
 app.get('/movieinfo', function (req, res) {
+    let fakeID = 'tt0261392';
+    let name = req.query.ID;
+    // console.log('query: ', req.query)
+
+    // let imdbIDurl = req.params.imdbIDurl;
+
+    console.log('name: ', name)
+
+    // res.json({ name });
+
+
     const options = {
         method: 'GET',
         url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-        qs: { i: 'tt4154796', r: 'json' },
+        qs: { i: `${name}`, r: 'json' },
         headers: {
-            'x-rapidapi-key': '964b58f1dbmshbd6688ef7750c2ap1a6bddjsn27f00b87431b',
-            'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
+            'x-rapidapi-key': keyHost.keyInfo.xRapidApiKey,
+            'x-rapidapi-host': keyHost.keyInfo.xRapidApiHost,
             useQueryString: true
         }
     };
@@ -66,23 +78,23 @@ app.get('/movieinfo', function (req, res) {
         if (error) throw new Error(error);
 
         res.send(body)
-        console.log(body);
+        // console.log(body);
     });
 
 
 });
 
-app.post('/', function (req, res) {
-    res.send('Got a POST request')
-})
+// app.post('/', function (req, res) {
+//     res.send('Got a POST request')
+// })
 
-app.put('/user', function (req, res) {
-    res.send('Got a PUT request at /user')
-})
+// app.put('/user', function (req, res) {
+//     res.send('Got a PUT request at /user')
+// })
 
-app.delete('/user', function (req, res) {
-    res.send('Got a DELETE request at /user')
-})
+// app.delete('/user', function (req, res) {
+//     res.send('Got a DELETE request at /user')
+// })
 
 
 
