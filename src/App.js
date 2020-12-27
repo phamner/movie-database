@@ -5,7 +5,7 @@ import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
-
+import MoreDetailsMovie from './MoreDetailsMovie.js'
 
 const arrayOfakeMovieData = [
   {
@@ -29,8 +29,10 @@ function App() {
   const [movieData, setMovieData] = useState(arrayOfakeMovieData);
   const [count, setCount] = useState(1);
   const [currentMovie, setCurrentMovie] = useState('');
+  const [currentMovieID, setCurrentMovieID] = useState('');
+  const [singleMovieSelected, settSingleMovieSelected] = useState(false);
 
-  let testHttpRequestMethod = function (testString) {
+  let searchMovies = function () {
     axios.get('/movies', {
       params: {
         ID: currentMovie,
@@ -54,22 +56,26 @@ function App() {
       });
   }
 
+  if (singleMovieSelected) {
+    return MoreDetailsMovie
+  } else {
+    return (
+      <div className="App">
+        {/* <MoreDetailsMovie /> */}
+        <h1>The current movie is: {currentMovie}</h1>
+        <Form onChange={(value) => { setCurrentMovie(value) }} />
+        <button onClick={() => { searchMovies() }}>
+          Search Movies
+        </button>
 
-  return (
-    <div className="App">
-      <Form onChange={(value) => { setCurrentMovie(value) }} />
-      <h1>The current movie is: {currentMovie}</h1>
 
-      <button onClick={() => { testHttpRequestMethod() }}>
-        Test HTTP request method
-      </button>
+        <div className="MovieList">
+          {movieData.map(movieData => <MovieList movieData={movieData} key={movieData.imdbID} />)}
+        </div>
 
-      <div className="MovieList">
-        {movieData.map(movieData => <MovieList movieData={movieData} key={movieData.imdbID} />)}
-      </div>
-
-    </div >
-  );
+      </div >
+    );
+  }
 }
 
 export default App;
