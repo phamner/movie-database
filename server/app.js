@@ -5,11 +5,14 @@ const path = require('path');
 const request = require('request');
 const keyHost = require('./APIkeys.js');
 
+
 var morgan = require("morgan");
 const bodyParser = require('body-parser');
 
 
 // console.log('KEY INFO: ', keyHost.keyInfo.xRapidApiKey)
+
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(morgan("common"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -50,15 +53,14 @@ app.get('/movies', function (req, res) {
 
 });
 
-//not working yet.
 app.get('/movieinfo', function (req, res) {
-    let fakeID = 'tt0261392';
+    let fakeID = 'tt0389790';
     let name = req.query.ID;
     // console.log('query: ', req.query)
 
     // let imdbIDurl = req.params.imdbIDurl;
 
-    console.log('name: ', name)
+    // console.log('name: ', name)
 
     // res.json({ name });
 
@@ -97,7 +99,10 @@ app.get('/movieinfo', function (req, res) {
 // })
 
 
+app.listen(process.env.PORT || 8080);
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+
+
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`)
+// })

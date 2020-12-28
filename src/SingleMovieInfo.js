@@ -2,7 +2,6 @@ const SingleMovieInfo = function (props) {
     console.log('SingleMovieInfo: ', props.currentMovieData)
     return (
         <div>
-            <h1>SingleMovieInfo Component</h1>
             <button onClick={() => {
                 props.returnToMovieList();
             }}>Return To Movie List</button>

@@ -10,6 +10,9 @@ function MovieList(props) {
                 getMoreInfoOnMovie={props.getMoreInfoOnMovie}
                 setCurrentMovieID={props.setCurrentMovieID}
                 currentMovieID={props.currentMovieID}
+
+                setSingleMovieSelected={props.setSingleMovieSelected}
+                setCurrentMovieData={props.setCurrentMovieData}
             />
         </div>
     )

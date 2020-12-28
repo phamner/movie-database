@@ -30,7 +30,6 @@ function App() {
   const [count, setCount] = useState(1);
   const [currentSearchString, setCurrentSearchString] = useState('');
   const [currentMovieData, setCurrentMovieData] = useState('');
-
   const [currentMovieID, setCurrentMovieID] = useState('');
   const [singleMovieSelected, setSingleMovieSelected] = useState(false);
 
@@ -55,24 +54,17 @@ function App() {
   }
 
   let getMoreInfoOnMovie = function () {
-    console.log('click want to get more info on movie');
+    // console.log('click want to get more info on movie');
     setSingleMovieSelected(true);
-    let ID = 'tt1073510'
+    let ID = 'tt1073510';
+    console.log('use this instead of the string tt1073510 eventually: ', currentMovieID)
+    // currentMovieID
 
-    axios.get(`/movieinfo?ID=${currentMovieID}`,
-      // {
-      //   params: {
-
-      //     ID: 'tt1073510'
-      //     // ID: currentMovieID,
-      //     // number: 12345
-      //   }
-      // }
-    )
+    axios.get(`/movieinfo?ID=${ID}`)
 
       .then(function (response) {
         // handle success
-        // console.log(response.data.Search);
+        // console.log(response.data.Search);a
         // setMovieData(() => [...response.data.Search]);
         // console.log(response.data)
         setCurrentMovieData(response.data)
@@ -86,8 +78,6 @@ function App() {
       .then(function () {
         // always executed
       });
-
-
   }
 
   let returnToMovieList = function () {
@@ -116,8 +106,9 @@ function App() {
             key={movieData.imdbID}
             getMoreInfoOnMovie={getMoreInfoOnMovie}
             setCurrentMovieID={setCurrentMovieID}
+            setSingleMovieSelected={setSingleMovieSelected}
+            setCurrentMovieData={setCurrentMovieData}
             currentMovieID={currentMovieID}
-
           />)}
         </div>
 
