@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
 import SingleMovieInfo from './SingleMovieInfo.js';
+import NoResultsList from './NoResultsList.js'
 
 const arrayOfakeMovieData = [
   {
@@ -20,18 +21,19 @@ const arrayOfakeMovieData = [
 
 function App() {
 
-  // useEffect(() => {
-  //   // Update the document title using the browser API
-  //   document.title = `You clicked banana times`;
-
-  // });
-
-  const [movieData, setMovieData] = useState(arrayOfakeMovieData);
+  const [movieData, setMovieData] = useState([]);
   const [count, setCount] = useState(1);
   const [currentSearchString, setCurrentSearchString] = useState('');
   const [currentMovieData, setCurrentMovieData] = useState('');
   const [currentMovieID, setCurrentMovieID] = useState('');
   const [singleMovieSelected, setSingleMovieSelected] = useState(false);
+
+  const [displayMovieList, setdisplayMovieList] = useState('initial');
+  //no results (initial)  done
+  //too many results
+  //no results found
+  //regular list  done
+
 
   let searchMovies = function () {
     axios.get('/movies', {
@@ -53,36 +55,55 @@ function App() {
       });
   }
 
-  let getMoreInfoOnMovie = function () {
-    // console.log('click want to get more info on movie');
-    setSingleMovieSelected(true);
-    let ID = 'tt1073510';
-    console.log('use this instead of the string tt1073510 eventually: ', currentMovieID)
-    // currentMovieID
+  // let getMoreInfoOnMovie = function () {
+  //   // console.log('click want to get more info on movie');
+  //   setSingleMovieSelected(true);
+  //   let ID = 'tt1073510';
+  //   console.log('use this instead of the string tt1073510 eventually: ', currentMovieID)
+  //   // currentMovieID
 
-    axios.get(`/movieinfo?ID=${ID}`)
+  //   axios.get(`/movieinfo?ID=${ID}`)
 
-      .then(function (response) {
-        // handle success
-        // console.log(response.data.Search);a
-        // setMovieData(() => [...response.data.Search]);
-        // console.log(response.data)
-        setCurrentMovieData(response.data)
+  //     .then(function (response) {
+  //       // handle success
+  //       // console.log(response.data.Search);a
+  //       // setMovieData(() => [...response.data.Search]);
+  //       // console.log(response.data)
+  //       setCurrentMovieData(response.data)
 
 
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  }
+  //     })
+  //     .catch(function (error) {
+  //       // handle error
+  //       console.log(error);
+  //     })
+  //     .then(function () {
+  //       // always executed
+  //     });
+  // }
 
   let returnToMovieList = function () {
     console.log('click want to go back to movie list');
     setSingleMovieSelected(false);
+  }
+
+  let currentMovieListDisplay;
+  if (displayMovieList === 'initial') {
+    currentMovieListDisplay = <NoResultsList />
+  } else {
+    currentMovieListDisplay =
+      <div className="MovieList">
+        {movieData.map(movieData => <MovieList
+          movieData={movieData}
+          key={movieData.imdbID}
+          // getMoreInfoOnMovie={getMoreInfoOnMovie}
+          setCurrentMovieID={setCurrentMovieID}
+          setSingleMovieSelected={setSingleMovieSelected}
+          setCurrentMovieData={setCurrentMovieData}
+          currentMovieID={currentMovieID}
+        />)}
+      </div>
+
   }
 
   if (singleMovieSelected) {
@@ -96,21 +117,13 @@ function App() {
       <div className="App">
         <h1>The current movie is: {currentSearchString}</h1>
         <Form onChange={(value) => { setCurrentSearchString(value) }} />
-        <button onClick={() => { searchMovies() }}>
+        <button onClick={() => {
+          searchMovies();
+          setdisplayMovieList('');
+        }}>
           Search Movies
         </button>
-
-        <div className="MovieList">
-          {movieData.map(movieData => <MovieList
-            movieData={movieData}
-            key={movieData.imdbID}
-            getMoreInfoOnMovie={getMoreInfoOnMovie}
-            setCurrentMovieID={setCurrentMovieID}
-            setSingleMovieSelected={setSingleMovieSelected}
-            setCurrentMovieData={setCurrentMovieData}
-            currentMovieID={currentMovieID}
-          />)}
-        </div>
+        {currentMovieListDisplay}
 
       </div >
     );
