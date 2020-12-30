@@ -97,6 +97,7 @@ const SideButton = styled.button`
 const Carousel = function (props) {
 
     console.log('carousel.js props data: ', props)
+    let movies = props.movieData;
 
     let moveForward = '>';
     let moveBack = '<';
@@ -117,14 +118,13 @@ const Carousel = function (props) {
     }]
 
     return (
-
         <AppWrapper>
             <CarouselWindowAndButtonsWrapper>
                 <SideButton type="button" onClick={props.shiftViewLeftBackwards} >{moveBack}</SideButton>
 
                 <CarouselWindowWrapper>
                     <CarouselWrapper carouselPosition={props.carouselPosition}>
-                        {movieDataArray.map(movieData => <CarouselHolder key={movieData.imdbID} movieData={movieData} />)}
+                        {movies.map(movieData => <CarouselHolder key={movieData.imdbID} movieData={movieData} />)}
                     </CarouselWrapper>
                 </CarouselWindowWrapper>
 
