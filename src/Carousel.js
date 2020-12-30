@@ -1,5 +1,5 @@
 import React from 'react';
-import CarouselHolder from './CarouselHolder.js';
+import CarouselItem from './CarouselItem.js';
 import styled from 'styled-components';
 
 const AppWrapper = styled.div`
@@ -124,7 +124,7 @@ const Carousel = function (props) {
 
                 <CarouselWindowWrapper>
                     <CarouselWrapper carouselPosition={props.carouselPosition}>
-                        {movies.map(movieData => <CarouselHolder key={movieData.imdbID} movieData={movieData} />)}
+                        {movies.map(movieData => <CarouselItem key={movieData.imdbID} movieData={movieData} />)}
                     </CarouselWrapper>
                 </CarouselWindowWrapper>
 

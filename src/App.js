@@ -47,23 +47,25 @@ function App() {
 
   const [displayMovieList, setdisplayMovieList] = useState('initial');
 
-  const [carouselPosition, setCarouselPosition] = useState(600);
+  const [carouselPosition, setCarouselPosition] = useState(1396);
+  //previously 600
+
   //no results (initial)  done
   //too many results
   //no results found
   //regular list  done
 
   const shiftViewLeftBackwards = function () {
-    if (carouselPosition < 590) {
-      setCarouselPosition(carouselPosition + 1194)
-    }
+    // if (carouselPosition < 590) {
+    setCarouselPosition(carouselPosition + 1194)
+    // }
   }
 
   const shiftViewRightForward = function () {
-    if (carouselPosition > -594) {
-      setCarouselPosition(carouselPosition - 1194)
-    }
+    // if (carouselPosition > -594) {
+    setCarouselPosition(carouselPosition - 1194)
   }
+  // }
 
 
 

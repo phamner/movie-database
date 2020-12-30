@@ -54,7 +54,7 @@ height: 40px;
 // border: 2px dashed blue;
 `
 
-function CarouselHolder(props) {
+function CarouselItem(props) {
     console.log('CarouselHolder.js props data: ', props)
 
     // let SingleStar = <img src={Star} alt="*" height="15" />
@@ -126,4 +126,4 @@ function CarouselHolder(props) {
     )
 }
 
-export default CarouselHolder;
+export default CarouselItem;
