@@ -7,6 +7,29 @@ import Form from './Form.js';
 import SingleMovieInfo from './SingleMovieInfo.js';
 import NoResultsList from './NoResultsList.js'
 import Carousel from './Carousel.js';
+import styled from 'styled-components';
+
+const SearchContainer = styled.div`
+  border: 1px solid black;
+  overflow: hidden;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+`
+
+const SearchButton = styled.button`
+  background: palevioletred;
+  border-radius: 3px;
+  border: 2px solid palevioletred;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  border: 1px solid green;
+  overflow: hidden; 
+
+`;
+
 
 
 const arrayOfakeMovieData = [
@@ -172,13 +195,19 @@ function App() {
     return (
       <div className="App">
         <h1>The current movie is: {currentSearchString}</h1>
-        <Form onChange={(value) => { setCurrentSearchString(value) }} />
-        <button onClick={() => {
-          searchMovies();
-          setdisplayMovieList('');
-        }}>
-          Search Movies
-        </button>
+
+        <SearchContainer>
+          <Form onChange={(value) => { setCurrentSearchString(value) }} />
+          <SearchButton onClick={() => {
+            searchMovies();
+            setdisplayMovieList('');
+          }}>
+            Search Movies
+          </SearchButton>
+        </SearchContainer>
+
+
+        {/* Movies display */}
         {currentMovieListDisplay}
 
       </div >

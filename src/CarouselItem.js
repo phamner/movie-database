@@ -6,7 +6,7 @@ import './styles.css';
 
 const CarouselItemWrapper = styled.div`
 width: 330px;
-height: 330px;
+height: 630px;
 background-color: #ffffff;
 color: black;
 border: 2px solid #ffffff;
@@ -81,7 +81,7 @@ function CarouselItem(props) {
 
     let imdbID = props.movieData.imdbID;
     let imageURL = props.movieData.Poster;
-    let image = <img src={imageURL} alt="Italian Trulli" height="120"></img>
+    let image = <img src={imageURL} alt="Italian Trulli" width="330"></img>
     let imdbIDurl = `https://www.imdb.com/title/${props.movieData.imdbID}/?ref_=hm_fanfav_tt_2_pd_fp1`
 
 
@@ -89,8 +89,10 @@ function CarouselItem(props) {
 
     return (
         <CarouselItemWrapper>
-            <div className="MovieListItem">
-                <h1>{props.movieData.Title}</h1>
+            <div>
+                <div>{image}</div>
+
+                <h3>{props.movieData.Title}</h3>
                 <h4>{props.movieData.Year}</h4>
                 <a href={imdbIDurl}>IMBd Info</a>
                 <br />
@@ -105,7 +107,6 @@ function CarouselItem(props) {
                     // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
 
                 }}>click me pls</button> */}
-                <div>{image}</div>
 
             </div>
 
