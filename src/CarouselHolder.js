@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-
-//All of the below are images for each news organization
-import ABCNews from './images/ABCNews.png';
-import HuffingtonPost from './images/HuffingtonPost.png';
-import Inc from './images/Inc.png';
-import MobiHealthNews from './images/MobiHealthNews.png';
-import TheWallStreetJournal from './images/TheWallStreetJournal.png';
-import TIME from './images/TIME.png';
+import './styles.css';
 
 //Image for stars
 import Star from './images/Star.png';
@@ -62,61 +55,61 @@ height: 40px;
 `
 
 function CarouselHolder(props) {
-    // console.log(props.caroselItem.header)
-    //PREVIOUS IMPLEMENTATION BELOW:
-    // let stars = '';
+    console.log('CarouselHolder.js props data: ', props)
 
-    // if (props.stars !== null) {
-    //     let allStars = ''
-    //     for (let i = 0; i < props.caroselItem.stars; i++) {
-    //         stars += `STAR`
-    //     }
-    // }
-
-    //NEW IMPLEMENTATION:
-
-    // Determines which news organization icon to use
-    let currentIcon;
-    if (props.caroselItem.icon === 'ABCNews') {
-        currentIcon = ABCNews
-    } else if (props.caroselItem.icon === 'HuffingtonPost') {
-        currentIcon = HuffingtonPost
-    } else if (props.caroselItem.icon === 'Inc') {
-        currentIcon = Inc
-    } else if (props.caroselItem.icon === 'MobiHealthNews') {
-        currentIcon = MobiHealthNews
-    } else if (props.caroselItem.icon === 'TheWallStreetJournal') {
-        currentIcon = TheWallStreetJournal
-    } else if (props.caroselItem.icon === 'TIME') {
-        currentIcon = TIME
-    }
-
-    let SingleStar = <img src={Star} alt="*" height="15" />
-    let starCounterId = 0;
+    // let SingleStar = <img src={Star} alt="*" height="15" />
+    // let starCounterId = 0;
 
     //Iterates through number of stars for each item and creates new img for each, using the SingleStar image
-    let children = props.caroselItem.starsArray.map((val) => {
-        starCounterId++;
-        return (
-            <div id={starCounterId} key={starCounterId}>&nbsp;{SingleStar}&nbsp;</div>
-        )
-    });
+    // let children = props.caroselItem.starsArray.map((val) => {
+    //     starCounterId++;
+    //     return (
+    //         <div id={starCounterId} key={starCounterId}>&nbsp;{SingleStar}&nbsp;</div>
+    //     )
+    // });
 
     //Checks to see if there are no stars for this carousel item.
-    if (props.caroselItem.starsArray.length < 1 || props.caroselItem.starsArray === null) {
-        children = <div id={starCounterId}>&nbsp;</div>
-    }
+    // if (props.caroselItem.starsArray.length < 1 || props.caroselItem.starsArray === null) {
+    //     children = <div id={starCounterId}>&nbsp;</div>
+    // }
 
     //For clarity.  Allows user to check out the relevant article 
-    let linkToArticle = props.caroselItem.link;
-    let headerText = props.caroselItem.header;
+    // let linkToArticle = props.caroselItem.link;
+    // let headerText = props.caroselItem.header;
+
+
+
+    let imdbID = props.movieData.imdbID;
+    let imageURL = props.movieData.Poster;
+    let image = <img src={imageURL} alt="Italian Trulli" height="120"></img>
+    let imdbIDurl = `https://www.imdb.com/title/${props.movieData.imdbID}/?ref_=hm_fanfav_tt_2_pd_fp1`
+
+
+
 
     return (
         <CarouselItemWrapper>
-            <StarWrapper>
-                {children}
-            </StarWrapper>
-            {/* {stars} */}
+            <div className="MovieListItem">
+                <h1>{props.movieData.Title}</h1>
+                <h4>{props.movieData.Year}</h4>
+                <a href={imdbIDurl}>IMBd Info</a>
+                <br />
+                {/* <button onClick={() => {
+                    //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
+                    //the correct movie. 
+                    // console.log('imdbID is : ', imdbID);
+                    props.setCurrentMovieID(imdbID);
+                    // console.log('CurrentMovieID: ', currentMovieID)
+
+                    getMoreInfoOnMovie();
+                    // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
+
+                }}>click me pls</button> */}
+                <div>{image}</div>
+
+            </div>
+
+            {/* 
             <img src={currentIcon} alt="ICON" height="40" />
             <HeaderWrapper>
                 <h4>{headerText}</h4>
@@ -127,7 +120,8 @@ function CarouselHolder(props) {
             </MainTextWrapper>
             <ReadArticleDivWrapper>
                 <ReadArticlePWrapper onClick={() => window.location.href = linkToArticle}>Read article</ReadArticlePWrapper>
-            </ReadArticleDivWrapper>
+            </ReadArticleDivWrapper>  */}
+
         </CarouselItemWrapper>
     )
 }

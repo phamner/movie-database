@@ -152,16 +152,11 @@ class Carousel extends React.Component {
 
             ],
             // carouselPosition: the starting position is 590px (previously.  Now using 600px)
-            carouselPosition: 600
+            carouselPosition: 600,
+            data: props
         };
-        this.readmeLink = this.readmeLink.bind(this);
         this.shiftViewLeftBackwards = this.shiftViewLeftBackwards.bind(this);
         this.shiftViewRightForward = this.shiftViewRightForward.bind(this);
-    }
-
-    //No longer using this method, and it uses fake data.  Can remove.
-    readmeLink(publication) {
-        'https://www.w3schools.com/jsref/event_onclick.asp'
     }
 
     shiftViewLeftBackwards() {
@@ -195,10 +190,33 @@ class Carousel extends React.Component {
         // console.log('LEFT: no movement: ', this.state.carouselPosition)
     }
 
-    render() {
+    render(props) {
+        // console.log('data: ', this.state.data)
+        // let movieDataArray = this.state.data;
+        console.log('carousel.js stateful data: ', this.state.data)
+        console.log('carousel.js props data: ', props)
+
+
+
 
         let moveForward = '>';
         let moveBack = '<';
+
+
+        let movieDataArray = [{
+            Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+            Title: "RED",
+            Type: "movie",
+            Year: "2010",
+            imdbID: "tt1245526"
+        },
+        {
+            Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+            Title: "RED",
+            Type: "movie",
+            Year: "2010",
+            imdbID: "tt1245527"
+        }]
 
         return (
             <AppWrapper>
@@ -208,7 +226,7 @@ class Carousel extends React.Component {
 
                     <CarouselWindowWrapper>
                         <CarouselWrapper carouselPosition={this.state.carouselPosition}>
-                            {this.state.caroselItems.map(caroselItem => <CarouselHolder key={caroselItem.icon} caroselItem={caroselItem} readmeLink={this.readmeLink} />)}
+                            {movieDataArray.map(movieData => <CarouselHolder key={movieData.imdbID} movieData={movieData} />)}
                         </CarouselWrapper>
                     </CarouselWindowWrapper>
 

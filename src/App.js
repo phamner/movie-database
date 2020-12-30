@@ -24,6 +24,22 @@ const arrayOfakeMovieData = [
 
 function App() {
 
+  let fakeData = [{
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 1",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245526"
+  },
+  {
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 2",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245525"
+  }]
+
+
   const [movieData, setMovieData] = useState([]);
   const [count, setCount] = useState(1);
   const [currentSearchString, setCurrentSearchString] = useState('');
@@ -93,10 +109,20 @@ function App() {
   let currentMovieListDisplay;
   if (displayMovieList === 'initial') {
     currentMovieListDisplay = <NoResultsList />
-  } else {
+  }
+  else if (displayMovieList !== 'initial' && movieData.length > 0) {
     currentMovieListDisplay =
       <div>
-        <Carousel />
+        <Carousel movieData={movieData} fakeData={fakeData} />
+        {/* {movieData.map(movieData => <Carousel
+          movieData={movieData}
+          key={movieData.imdbID}
+          // getMoreInfoOnMovie={getMoreInfoOnMovie}
+          setCurrentMovieID={setCurrentMovieID}
+          setSingleMovieSelected={setSingleMovieSelected}
+          setCurrentMovieData={setCurrentMovieData}
+          currentMovieID={currentMovieID}
+        />)} */}
 
         <div className="MovieList">
 
