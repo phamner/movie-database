@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import './styles.css';
 
 //Image for stars
-import Star from './images/Star.png';
+// import Star from './images/Star.png';
 
 const CarouselItemWrapper = styled.div`
 width: 330px;

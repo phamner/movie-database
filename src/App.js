@@ -1,14 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import MovieList from './MovieList.js';
-// import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
 import SingleMovieInfo from './SingleMovieInfo.js';
 import NoResultsList from './NoResultsList.js'
 import Carousel from './Carousel.js';
-// import CarouselHolder from '@bit/phamner.carousel-component-dod.carousel-holder';
 
 
 const arrayOfakeMovieData = [
@@ -48,13 +46,28 @@ function App() {
   const [singleMovieSelected, setSingleMovieSelected] = useState(false);
 
   const [displayMovieList, setdisplayMovieList] = useState('initial');
+
+  const [carouselPosition, setCarouselPosition] = useState(600);
   //no results (initial)  done
   //too many results
   //no results found
   //regular list  done
 
+  const shiftViewLeftBackwards = function () {
+    if (carouselPosition < 590) {
+      setCarouselPosition(carouselPosition + 1194)
+    }
+  }
 
-  let searchMovies = function () {
+  const shiftViewRightForward = function () {
+    if (carouselPosition > -594) {
+      setCarouselPosition(carouselPosition - 1194)
+    }
+  }
+
+
+
+  const searchMovies = function () {
     axios.get('/movies', {
       params: {
         ID: currentSearchString,
@@ -101,7 +114,7 @@ function App() {
   //     });
   // }
 
-  let returnToMovieList = function () {
+  const returnToMovieList = function () {
     console.log('click want to go back to movie list');
     setSingleMovieSelected(false);
   }
@@ -113,7 +126,13 @@ function App() {
   else if (displayMovieList !== 'initial' && movieData.length > 0) {
     currentMovieListDisplay =
       <div>
-        <Carousel movieData={movieData} fakeData={fakeData} />
+        <Carousel
+          movieData={movieData}
+          fakeData={fakeData}
+          shiftViewLeftBackwards={shiftViewLeftBackwards}
+          shiftViewRightForward={shiftViewRightForward}
+          carouselPosition={carouselPosition}
+        />
         {/* {movieData.map(movieData => <Carousel
           movieData={movieData}
           key={movieData.imdbID}
