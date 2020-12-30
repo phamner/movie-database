@@ -1,12 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import MovieList from './MovieList.js';
-import Example from './Example.js';
+// import Example from './Example.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
 import SingleMovieInfo from './SingleMovieInfo.js';
 import NoResultsList from './NoResultsList.js'
+import Carousel from './Carousel.js';
+// import CarouselHolder from '@bit/phamner.carousel-component-dod.carousel-holder';
+
 
 const arrayOfakeMovieData = [
   {
@@ -92,16 +95,22 @@ function App() {
     currentMovieListDisplay = <NoResultsList />
   } else {
     currentMovieListDisplay =
-      <div className="MovieList">
-        {movieData.map(movieData => <MovieList
-          movieData={movieData}
-          key={movieData.imdbID}
-          // getMoreInfoOnMovie={getMoreInfoOnMovie}
-          setCurrentMovieID={setCurrentMovieID}
-          setSingleMovieSelected={setSingleMovieSelected}
-          setCurrentMovieData={setCurrentMovieData}
-          currentMovieID={currentMovieID}
-        />)}
+      <div>
+        <Carousel />
+
+        <div className="MovieList">
+
+          {movieData.map(movieData => <MovieList
+            movieData={movieData}
+            key={movieData.imdbID}
+            // getMoreInfoOnMovie={getMoreInfoOnMovie}
+            setCurrentMovieID={setCurrentMovieID}
+            setSingleMovieSelected={setSingleMovieSelected}
+            setCurrentMovieData={setCurrentMovieData}
+            currentMovieID={currentMovieID}
+          />)}
+        </div>
+
       </div>
 
   }
