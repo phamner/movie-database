@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const AppWrapper = styled.div`
 background-color: #F9F9F9;
+
 color: black;
 // border: 2px dashed green;
 margin: auto;
@@ -88,7 +89,9 @@ const SideButton = styled.button`
   background: white;
   cursor: pointer;
   // border-radius: 50%;
-  height: 370px;
+//   height: 370px;
+height: 675px;
+
   width: 75;
   outline: none;
   box-shadow: none;
@@ -97,6 +100,7 @@ const SideButton = styled.button`
 const Carousel = function (props) {
 
     console.log('carousel.js props data: ', props)
+
     let movies = props.movieData;
 
     let moveForward = '>';
@@ -124,7 +128,14 @@ const Carousel = function (props) {
 
                 <CarouselWindowWrapper>
                     <CarouselWrapper carouselPosition={props.carouselPosition}>
-                        {movies.map(movieData => <CarouselItem key={movieData.imdbID} movieData={movieData} />)}
+                        {movies.map(movieData => <CarouselItem
+                            key={movieData.imdbID}
+                            movieData={movieData}
+                            movieFuncs={props}
+                        // getMoreInfoOnMovie={props.getMoreInfoOnMovie}
+                        // setCurrentMovieData={props.setCurrentMovieData}
+
+                        />)}
                     </CarouselWrapper>
                 </CarouselWindowWrapper>
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import './styles.css';
+import axios from 'axios';
 
 //Image for stars
 // import Star from './images/Star.png';
@@ -8,12 +9,23 @@ const CarouselItemWrapper = styled.div`
 width: 330px;
 height: 630px;
 background-color: #ffffff;
+
 color: black;
 border: 2px solid #ffffff;
 margin: 16px;
 padding: 16px;
 box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.13);
 `
+
+const ImageWrapper = styled.div`
+    height: 500px;
+    // border: 0.5px solid blue;
+    overflow: hidden;
+`
+
+
+
+// not using the styled components below.
 
 const StarWrapper = styled.div`
 background: transparent;
@@ -55,7 +67,30 @@ height: 40px;
 `
 
 function CarouselItem(props) {
-    console.log('CarouselHolder.js props data: ', props)
+    console.log('CarouselItem.js props data: ', props)
+
+
+    let movieID = props.movieData.imdbID
+
+    let getMoreInfoOnMovie = function () {
+        props.movieFuncs.setSingleMovieSelected(true);
+        // console.log('use this instead of the string tt1073510 eventually: ', movieID)
+
+        axios.get(`/movieinfo?ID=${movieID}`)
+
+            .then(function (response) {
+                // handle success
+                props.movieFuncs.setCurrentMovieData(response.data)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }
+
 
     // let SingleStar = <img src={Star} alt="*" height="15" />
     // let starCounterId = 0;
@@ -81,7 +116,7 @@ function CarouselItem(props) {
 
     let imdbID = props.movieData.imdbID;
     let imageURL = props.movieData.Poster;
-    let image = <img src={imageURL} alt="Italian Trulli" width="330"></img>
+    let image = <img src={imageURL} alt="No Image Found" width="330"></img>
     let imdbIDurl = `https://www.imdb.com/title/${props.movieData.imdbID}/?ref_=hm_fanfav_tt_2_pd_fp1`
 
 
@@ -90,23 +125,26 @@ function CarouselItem(props) {
     return (
         <CarouselItemWrapper>
             <div>
-                <div>{image}</div>
+                <ImageWrapper>
+                    <div>{image}</div>
+
+                </ImageWrapper>
 
                 <h3>{props.movieData.Title}</h3>
                 <h4>{props.movieData.Year}</h4>
                 <a href={imdbIDurl}>IMBd Info</a>
                 <br />
-                {/* <button onClick={() => {
+                <button onClick={() => {
                     //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
                     //the correct movie. 
                     // console.log('imdbID is : ', imdbID);
-                    props.setCurrentMovieID(imdbID);
+                    props.movieFuncs.setCurrentMovieID(imdbID);
                     // console.log('CurrentMovieID: ', currentMovieID)
 
                     getMoreInfoOnMovie();
                     // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
 
-                }}>click me pls</button> */}
+                }}>click me pls</button>
 
             </div>
 
