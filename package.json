@@ -2,6 +2,7 @@
   "name": "movie-database",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -21,6 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "run": "nodemon server/app.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

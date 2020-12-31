@@ -6,20 +6,14 @@ const request = require('request');
 const keyHost = require('./APIkeys.js');
 
 
-var morgan = require("morgan");
+const morgan = require("morgan");
 const bodyParser = require('body-parser');
-
-
-// console.log('KEY INFO: ', keyHost.keyInfo.xRapidApiKey)
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(morgan("common"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-
-
-
 
 
 app.get('/', (req, res) => {
@@ -85,18 +79,6 @@ app.get('/movieinfo', function (req, res) {
 
 
 });
-
-// app.post('/', function (req, res) {
-//     res.send('Got a POST request')
-// })
-
-// app.put('/user', function (req, res) {
-//     res.send('Got a PUT request at /user')
-// })
-
-// app.delete('/user', function (req, res) {
-//     res.send('Got a DELETE request at /user')
-// })
 
 
 app.listen(process.env.PORT || 8080);
