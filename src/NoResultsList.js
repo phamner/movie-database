@@ -1,7 +1,6 @@
-
 const NoResultsList = function () {
     return (
-        <div></div>
+        <div>no results</div>
     )
 }
 

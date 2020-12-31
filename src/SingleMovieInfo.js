@@ -5,24 +5,23 @@ const ReturnButton = styled.button`
   height: 60px;
   background: palevioletred;
   border-radius: 3px;
-  border: 2px solid palevioletred;
   color: white;
-  margin: 2em;
+  margin-left: 5em;
   padding: 0.25em;
-  border: 1px solid green;
+  border: 1px solid black;
   overflow: hidden; 
   float:left;
   cursor: pointer;
-
 `;
 
 const MovieWrapper = styled.div`
     width: 65%;
-    height: 800px;
+    height: 100%;
     background-color: #333333;
     color: #fff;
     border: 2px solid #ffffff;
     margin: auto;
+    margin-top: 50px;
     padding: 16px;
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.13);
 `
@@ -70,18 +69,13 @@ const MoviePhoto = styled.img`
     margin: 5px;
 `
 
-// const DetailCategory = styled.h4``
-
-// const DetailInformation = styled.p``
-
-
 
 
 const SingleMovieInfo = function (props) {
     console.log('SingleMovieInfo: ', props.currentMovieData)
     return (
         <div>
-            <ReturnButton onClick={() => { props.returnToMovieList(); }}>Return To Movie List</ReturnButton >
+            <ReturnButton onClick={() => { props.returnToMovieList(); }}>Return To Results</ReturnButton >
 
             <MovieWrapper>
                 <h1>{props.currentMovieData.Title}<YearOfRelease>({props.currentMovieData.Year})</YearOfRelease></h1>
@@ -116,8 +110,6 @@ const SingleMovieInfo = function (props) {
                 </PhotoAndDetailsContainer>
 
                 <p>{props.currentMovieData.Plot}</p>
-
-
 
             </MovieWrapper>
         </div>

@@ -124,51 +124,20 @@ function CarouselItem(props) {
 
     return (
         <CarouselItemWrapper onClick={() => {
-            //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
-            //the correct movie. 
-            // console.log('imdbID is : ', imdbID);
-            props.movieFuncs.setCurrentMovieID(imdbID);
-            // console.log('CurrentMovieID: ', currentMovieID)
 
+            props.movieFuncs.setCurrentMovieID(imdbID);
             getMoreInfoOnMovie();
-            // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
 
         }}>
             <div>
                 <ImageWrapper>
                     <div>{image}</div>
-
                 </ImageWrapper>
 
                 <h3>{props.movieData.Title}</h3>
                 <h4>{props.movieData.Year}</h4>
                 {/* <a href={imdbIDurl}>IMBd Info</a> */}
-                {/* <button onClick={() => {
-                    //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
-                    //the correct movie. 
-                    // console.log('imdbID is : ', imdbID);
-                    props.movieFuncs.setCurrentMovieID(imdbID);
-                    // console.log('CurrentMovieID: ', currentMovieID)
-
-                    getMoreInfoOnMovie();
-                    // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
-
-                }}>click me pls</button> */}
-
             </div>
-
-            {/* 
-            <img src={currentIcon} alt="ICON" height="40" />
-            <HeaderWrapper>
-                <h4>{headerText}</h4>
-            </HeaderWrapper>
-
-            <MainTextWrapper>
-                <p>{props.caroselItem.mainText}</p>
-            </MainTextWrapper>
-            <ReadArticleDivWrapper>
-                <ReadArticlePWrapper onClick={() => window.location.href = linkToArticle}>Read article</ReadArticlePWrapper>
-            </ReadArticleDivWrapper>  */}
 
         </CarouselItemWrapper>
     )
