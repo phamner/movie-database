@@ -128,8 +128,8 @@ const Carousel = function (props) {
 
                 <CarouselWindowWrapper>
                     <CarouselWrapper carouselPosition={props.carouselPosition}>
+
                         {movies.map(movieData => <CarouselItem
-                            onClick={() => { console.log('click the movie, show more info pls! ') }}
                             key={movieData.imdbID}
                             movieData={movieData}
                             movieFuncs={props}

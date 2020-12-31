@@ -47,8 +47,6 @@ const SearchButton = styled.button`
   border: 1px solid green;
   overflow: hidden; 
   float:left;
-
-
 `;
 
 

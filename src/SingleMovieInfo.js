@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const ReturnButton = styled.button`
+// font-size: 40px
+  height: 60px;
   background: palevioletred;
   border-radius: 3px;
   border: 2px solid palevioletred;
   color: white;
-  margin: 1em;
+  margin: 2em;
   padding: 0.25em;
   border: 1px solid green;
   overflow: hidden; 
@@ -65,6 +67,10 @@ const MoviePhoto = styled.img`
     margin: 5px;
 `
 
+// const DetailCategory = styled.h4``
+
+// const DetailInformation = styled.p``
+
 
 
 
@@ -72,7 +78,7 @@ const SingleMovieInfo = function (props) {
     console.log('SingleMovieInfo: ', props.currentMovieData)
     return (
         <div>
-            <ReturnButton onClick={() => { props.returnToMovieList(); }}>Return To Movie List</ReturnButton>
+            <ReturnButton onClick={() => { props.returnToMovieList(); }}>Return To Movie List</ReturnButton >
 
             <MovieWrapper>
                 <h1>{props.currentMovieData.Title}<YearOfRelease>({props.currentMovieData.Year})</YearOfRelease></h1>
@@ -89,26 +95,20 @@ const SingleMovieInfo = function (props) {
                 <PhotoAndDetailsContainer>
                     <MoviePhoto src={props.currentMovieData.Poster} alt="Movie Poster"></MoviePhoto>
                     <LowerMovieDetailsWrapper>
-                        <p>Actors: {props.currentMovieData.Actors}</p>
-                        <p>Awards: {props.currentMovieData.Awards}</p>
-                        <p>BoxOffice: {props.currentMovieData.BoxOffice}</p>
-                        <p>Production: {props.currentMovieData.Production}</p>
-                        <p>Released: {props.currentMovieData.Released}</p>
-
-                        <p>Country: {props.currentMovieData.Country}</p>
-                        <p>Director: {props.currentMovieData.Director}</p>
-                        <p>Language: {props.currentMovieData.Language}</p>
-                        <p>Metascore: {props.currentMovieData.Metascore}</p>
-                        <p>Production: {props.currentMovieData.Production}</p>
-                        {/* <p>{props.currentMovieData.Ratings}</p> */}
-
-                        <p>Plot: {props.currentMovieData.Plot}</p>
-
-                        <p>Website: {props.currentMovieData.Website}</p>
-                        <p>Writer: {props.currentMovieData.Writer}</p>
-                        <p>Year: {props.currentMovieData.Year}</p>
-                        <p>imdbRating: {props.currentMovieData.imdbRating}</p>
-                        {/* <p>imdbVotes: {props.currentMovieData.imdbVotes}</p> */}
+                        <p><strong>Actors: </strong>{props.currentMovieData.Actors}</p>
+                        <p><strong>Awards: </strong>{props.currentMovieData.Awards}</p>
+                        <p><strong>BoxOffice: </strong>{props.currentMovieData.BoxOffice}</p>
+                        <p><strong>Production: </strong>{props.currentMovieData.Production}</p>
+                        <p><strong>Released: </strong>{props.currentMovieData.Released}</p>
+                        <p><strong>Country: </strong>{props.currentMovieData.Country}</p>
+                        <p><strong>Director: </strong>{props.currentMovieData.Director}</p>
+                        <p><strong>Language: </strong>{props.currentMovieData.Language}</p>
+                        <p><strong>Metascore: </strong>{props.currentMovieData.Metascore}</p>
+                        <p><strong>Production: </strong>{props.currentMovieData.Production}</p>
+                        <p><strong>Website: </strong>{props.currentMovieData.Website}</p>
+                        <p><strong>Writer: </strong>{props.currentMovieData.Writer}</p>
+                        <p><strong>Year: </strong>{props.currentMovieData.Year}</p>
+                        <p><strong>imdbRating: </strong>{props.currentMovieData.imdbRating}</p>
                     </LowerMovieDetailsWrapper>
                 </PhotoAndDetailsContainer>
 
