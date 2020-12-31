@@ -5,10 +5,10 @@ import styled from 'styled-components'
 const SearchForm = styled.input`
     width: 300px;
     float:left;
-    border: 1px dashed blue;
+    border: 2px solid black;
     margin: 1em;
     padding: 0.25em;
-
+    border-radius: 3px;
 `
 
 

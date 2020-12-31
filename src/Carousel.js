@@ -142,8 +142,9 @@ const Carousel = function (props) {
 
                 <SideButton type="button" onClick={props.shiftViewRightForward}>{moveForward}</SideButton>
             </CarouselWindowAndButtonsWrapper>
-            <LeftButton type="button" onClick={props.shiftViewLeftBackwards} carouselPosition={props.carouselPosition}></LeftButton>
-            <RightButton type="button" onClick={props.shiftViewRightForward} carouselPosition={props.carouselPosition}></RightButton>
+            {/* the below buttons work, but need improvesments for more than 2 slides. */}
+            {/* <LeftButton type="button" onClick={props.shiftViewLeftBackwards} carouselPosition={props.carouselPosition}></LeftButton>
+            <RightButton type="button" onClick={props.shiftViewRightForward} carouselPosition={props.carouselPosition}></RightButton> */}
         </AppWrapper>
     );
 }
