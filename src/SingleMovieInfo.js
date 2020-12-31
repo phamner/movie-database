@@ -12,6 +12,8 @@ const ReturnButton = styled.button`
   border: 1px solid green;
   overflow: hidden; 
   float:left;
+  cursor: pointer;
+
 `;
 
 const MovieWrapper = styled.div`
@@ -43,6 +45,7 @@ color: #fff;
 // border: 1px dashed blue;
 // display: flex;
 margin: 5px;
+padding: 0 1em 0 1em;
 
 `
 
@@ -89,7 +92,7 @@ const SingleMovieInfo = function (props) {
                     <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
                     <p>{props.currentMovieData.Runtime}</p>
                     <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-                    <p>{props.currentMovieData.Rated}</p>
+                    <p>Rated {props.currentMovieData.Rated}</p>
                 </MovieDetailsWrapper>
 
                 <PhotoAndDetailsContainer>
@@ -111,6 +114,9 @@ const SingleMovieInfo = function (props) {
                         <p><strong>imdbRating: </strong>{props.currentMovieData.imdbRating}</p>
                     </LowerMovieDetailsWrapper>
                 </PhotoAndDetailsContainer>
+
+                <p>{props.currentMovieData.Plot}</p>
+
 
 
             </MovieWrapper>

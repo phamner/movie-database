@@ -64,20 +64,38 @@ const SearchButton = styled.button`
 
 function App() {
 
-  // let fakeData = [{
-  //   Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
-  //   Title: "from app good data fake tho 1",
-  //   Type: "movie",
-  //   Year: "2010",
-  //   imdbID: "tt1245526"
-  // },
-  // {
-  //   Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
-  //   Title: "from app good data fake tho 2",
-  //   Type: "movie",
-  //   Year: "2010",
-  //   imdbID: "tt1245525"
-  // }]
+  let fakeData = [{
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 1",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245526"
+  },
+  {
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 2",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245525"
+  }, {
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 1",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245526"
+  }, {
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 1",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245526"
+  }, {
+    Poster: "https://m.media-amazon.com/images/M/MV5BMzg2Mjg1OTk0NF5BMl5BanBnXkFtZTcwMjQ4MTA3Mw@@._V1_SX300.jpg",
+    Title: "from app good data fake tho 1",
+    Type: "movie",
+    Year: "2010",
+    imdbID: "tt1245526"
+  }]
 
 
   const [movieData, setMovieData] = useState([]);
@@ -90,6 +108,11 @@ function App() {
   const [displayMovieList, setdisplayMovieList] = useState('initial');
 
   const [carouselPosition, setCarouselPosition] = useState(0);
+  const [leftMostPosition, setleftMostPosition] = useState(0);
+  const [rightMostPosition, setRightMostPosition] = useState(0);
+
+
+
   //previously 600
 
   //no results (initial)  done
@@ -98,16 +121,16 @@ function App() {
   //regular list  done
 
   const shiftViewLeftBackwards = function () {
-    // if (carouselPosition < 590) {
-    setCarouselPosition(carouselPosition + 1194)
-    // }
+    if (carouselPosition < leftMostPosition) {
+      setCarouselPosition(carouselPosition + 1194)
+    }
   }
 
   const shiftViewRightForward = function () {
-    // if (carouselPosition > -594) {
-    setCarouselPosition(carouselPosition - 1194)
+    if (carouselPosition > rightMostPosition) {
+      setCarouselPosition(carouselPosition - 1194)
+    }
   }
-  // }
 
 
 
@@ -122,31 +145,62 @@ function App() {
         //398 item width
         let numberOfMovies = [...response.data.Search].length;
         if (numberOfMovies === 10) {
+          setleftMostPosition(1396)
           setCarouselPosition(1396)
+          setRightMostPosition(-2186)
         } else if (numberOfMovies === 9) {
-          setCarouselPosition(998)
+          setleftMostPosition(998)
+          setCarouselPosition(1200)
+          setRightMostPosition(-992)
+          //good
         } else if (numberOfMovies === 8) {
+          setleftMostPosition(600)
           setCarouselPosition(600)
+          setRightMostPosition(-992)
         } else if (numberOfMovies === 7) {
-          setCarouselPosition(202)
+          setleftMostPosition(800)
+          setCarouselPosition(800)
+          setRightMostPosition(-992)
+
+          //good
         } else if (numberOfMovies === 6) {
-          // setCarouselPosition(-196)
+          setleftMostPosition(600)
           setCarouselPosition(600)
+          setRightMostPosition(202)
+
           //good?
         } else if (numberOfMovies === 5) {
+          setleftMostPosition(-594)
           setCarouselPosition(-594)
+          setRightMostPosition(202)
+
         } else if (numberOfMovies === 4) {
+          setleftMostPosition(202)
           setCarouselPosition(202)
+          setRightMostPosition(202)
+
           //good
         } else if (numberOfMovies === 3) {
           // setCarouselPosition(-1390)
+          setleftMostPosition(0)
           setCarouselPosition(0)
+          setRightMostPosition(1396)
+
+
           //good
         } else if (numberOfMovies === 2) {
+          setleftMostPosition(-196)
           setCarouselPosition(-196)
+          setRightMostPosition(1396)
+
           //good
         } else if (numberOfMovies === 1) {
+          setleftMostPosition(0)
+          setRightMostPosition(1396)
+
+
           // setCarouselPosition(-2186)
+          //good
           setCarouselPosition(0)
 
         }
