@@ -6,6 +6,9 @@ const SearchForm = styled.input`
     width: 300px;
     float:left;
     border: 1px dashed blue;
+    margin: 1em;
+    padding: 0.25em;
+
 `
 
 

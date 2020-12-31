@@ -9,7 +9,7 @@ const CarouselItemWrapper = styled.div`
 width: 330px;
 height: 630px;
 background-color: #ffffff;
-
+cursor: pointer;
 color: black;
 border: 2px solid #ffffff;
 margin: 16px;
@@ -123,7 +123,17 @@ function CarouselItem(props) {
 
 
     return (
-        <CarouselItemWrapper>
+        <CarouselItemWrapper onClick={() => {
+            //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
+            //the correct movie. 
+            // console.log('imdbID is : ', imdbID);
+            props.movieFuncs.setCurrentMovieID(imdbID);
+            // console.log('CurrentMovieID: ', currentMovieID)
+
+            getMoreInfoOnMovie();
+            // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
+
+        }}>
             <div>
                 <ImageWrapper>
                     <div>{image}</div>
@@ -132,9 +142,8 @@ function CarouselItem(props) {
 
                 <h3>{props.movieData.Title}</h3>
                 <h4>{props.movieData.Year}</h4>
-                <a href={imdbIDurl}>IMBd Info</a>
-                <br />
-                <button onClick={() => {
+                {/* <a href={imdbIDurl}>IMBd Info</a> */}
+                {/* <button onClick={() => {
                     //Make these two functions call syncronously, in their current order.  Need new CurrentMovieID so we can search for
                     //the correct movie. 
                     // console.log('imdbID is : ', imdbID);
@@ -144,7 +153,7 @@ function CarouselItem(props) {
                     getMoreInfoOnMovie();
                     // setTimeout(() => props.getMoreInfoOnMovie(), 3000)
 
-                }}>click me pls</button>
+                }}>click me pls</button> */}
 
             </div>
 
