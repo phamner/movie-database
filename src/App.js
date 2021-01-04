@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import MovieList from './MovieList.js';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from './Form.js';
